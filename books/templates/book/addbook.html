@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+{% block content %}
+
+<div class="row d-flex justify-content-center">
+    
+    <form action="" method="POST" novalidate>
+        {% csrf_token %}
+        <br>
+        <h2>Add Book</h2>
+        <br>
+            {{ form.as_p }}
+            
+            <div class="checkbox">
+                <label><input type="checkbox" name="remember" id="get_box"> Digital Copy</label>
+            </div>
+            <center>
+                <input type="submit" name="Add" value="Add" class="btn btn-sm btn-outline-primary" >
+            </center>
+    </form>
+</div>
+<script>
+    var loc = document.getElementById('get_location');
+    var btn = document.getElementById("get_box");
+
+    btn.onclick = function() {
+        loc.disabled=this.checked;
+        loc .value = ''
+    }
+</script>
+  {% endblock %}

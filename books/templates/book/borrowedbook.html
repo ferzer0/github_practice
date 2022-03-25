@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <table class="table">
+        <tr>
+            <th scope="col">Book </th>
+            <th scope="col">Location </th>
+            <th scope="col">Status </th>
+            <th scope="col">Owner </th>
+            <th scope="col">Checked Date</th>
+            <th scope="col">Return Date</th>
+        </tr>
+        {% for borrowed in borrowed_book %}
+        <tr>
+            <td><a href="{%  url 'book:detail' borrowed.book.pk %}">{{borrowed.book.title}}</a><br>
+            <p>by</p>{{borrowed.book.author}} </td>
+            <td>{{borrowed.book.location}}</td>
+            <td>{{borrowed.book.status}}</td>
+            <td>{{borrowed.book.user.first_name}} {{borrowed.book.user.last_name}}</td> 
+            <td>{{borrowed.date_borrow}}</td> 
+            <td>
+            {% if borrowed.book.status == "Borrowed" and borrowed.return_date == None %}
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Return Book
+              </button>
+              <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                  
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Confirmation</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      Are you sure you want to return "{{borrowed.book.title}}"?
+                    </div>
+                    
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <form method="POST" action="{% url 'book:return_book' borrowed.pk %}">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-outline-danger" type="submit"> Return book</button>
+                        </form>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+                
+            {%else%}
+                {{borrowed.return_date}}
+            {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    
+{% endblock %}

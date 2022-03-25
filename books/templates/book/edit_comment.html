@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="mx-auto" style="width: 600px;">
+    <center><h2>Edit comment</h2></center>
+    <form action="" method="POST">
+        {% csrf_token %}
+       
+            {{ comment_form.as_p }}
+            
+        <input type="submit" name="Add" value="Update">
+        
+    </form>
+        <hr>
+</div>
+{% endblock %}

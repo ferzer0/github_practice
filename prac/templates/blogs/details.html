@@ -1,0 +1,16 @@
+<h1> {{ blog.title }} </h1>
+<small> By: {{ blog.author }} </small> 
+<hr>
+{{ blog.content }}
+<br>
+    <h2> Comments </h2>
+        <form method = "POST" action="{% url 'blogs:detail' %}">
+            {% csrf_token %}
+                {{form}}
+        </form>
+            {% for comment in content %}
+                {{comment.author}}
+                {{comment.date_added}}
+                {{comment.content}}
+            {% endfor %}
+<a href="{% url 'blogs:index' %}"> BACK </a>

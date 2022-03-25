@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <table class="table">
+        <tr>
+            <th scope="col">Book </th>
+            <th scope="col">Location </th>
+            <th scope="col">Status </th>
+            <th scope="col">Owner </th>
+            <th scope="col"> </th>
+            <th scope="col"> </th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td><a href="{% url 'book:detail' book.pk %}">{{book.title}}</a><br>
+            <p>by</p> {{book.author}}</td>
+            <td>{{book.location}}</td>
+            <td>{{book.status}}</td> 
+            <td>{{book.user}}</td> 
+            <td><a class="btn btn-sm btn-outline-success" href="{% url 'book:update' book.pk %}"> Update</a></td>
+            <td><a class="btn btn-sm btn-outline-danger" href="{% url 'book:delete' book.pk %}"> Delete</a></td> 
+    {% endfor %}
+    
+{% endblock %}

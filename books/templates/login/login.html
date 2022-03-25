@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'user/style.css' %}">
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<div class="login-form mt-5">
+    <div class="row d-flex justify-content-center">
+        <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <h1> Log In</h1>
+            <input type="email" class="form-control" name="email" placeholder="Email">
+            
+       </div>
+        <div class="mb-3">
+            
+            <input type="password" class="form-control" name="password" placeholder="Password">
+        </div>
+        <div>
+            
+            
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+            <p class="text-success">{{message}}</p>
+            {%endfor%}
+            {%endif%}
+        </div>
+            <button class="btn btn-outline-info" type="submit">Log In</button>
+<br><br>
+        Haven't registered yet? <a href="{% url 'user:register' %}">Sign up Now</a>
+            </div>
+    </div>
+       
+    </form>
+</div>
+{% endblock %}

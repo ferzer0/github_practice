@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="row d-flex justify-content-center">
+    
+    <form method="POST">
+        {% csrf_token %}
+        <h2>Settings</h2><hr>
+        {{form.as_p}}
+        <div>
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{message}}
+            {%endfor%}
+            {%endif%}
+        </div>
+        <hr>
+   <center><input type="submit" name="Add" value="Update" class="btn btn-outline-success"></center>
+    </form>
+    
+        </div>
+</div>
+{% endblock %}
