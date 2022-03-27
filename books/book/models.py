@@ -11,9 +11,9 @@ class Book(models.Model):
         ('Available', 'Available'),
         ('Borrowed', 'Borrowed'),
     )
-    title = models.CharField(max_length=200) 
-    author = models.CharField(max_length=200)
-    location = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, blank=False) 
+    author = models.CharField(max_length=200, blank=False)
+    location = models.CharField(max_length=100)
     status = models.CharField(max_length=200, choices=CHOICE_STATUS) 
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     date_added = models.DateTimeField(auto_now_add=True) 

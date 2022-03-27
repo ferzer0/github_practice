@@ -24,3 +24,4 @@ urlpatterns = [
     path('book/', include('book.urls')),
 ]
 handler403 = 'book.views.error403'
+handler403 = 'user.views.error403'

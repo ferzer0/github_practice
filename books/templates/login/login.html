@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'user/style.css' %}">
+
 {% block title %}Login{% endblock %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
 <div class="login-form mt-5">
     <div class="row d-flex justify-content-center">
@@ -19,12 +20,11 @@
             <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <div>
-            
-            
+               
             {% if messages %}
             {% for message in messages %}
-            <div class="alert alert-{{ message.tags }}">
-            <p class="text-success">{{message}}</p>
+                <div class="alert alert-{{ message.tags }}">
+                <p class="text-success">{{message}}</p>
             {%endfor%}
             {%endif%}
         </div>
@@ -36,4 +36,13 @@
        
     </form>
 </div>
+<script>
+var m = document.getElementsByClassName("alert");  // Return an array
+
+setTimeout(function(){
+   if (m && m.length) {
+       m[0].classList.add('hide');
+   }
+}, 5000);
+</script>
 {% endblock %}

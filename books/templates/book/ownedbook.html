@@ -19,6 +19,7 @@
             <td>{{book.user}}</td> 
             <td><a class="btn btn-sm btn-outline-success" href="{% url 'book:update' book.pk %}"> Update</a></td>
             <td><a class="btn btn-sm btn-outline-danger" href="{% url 'book:delete' book.pk %}"> Delete</a></td> 
+        </tr>
     {% endfor %}
     
 {% endblock %}

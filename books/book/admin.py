@@ -17,7 +17,7 @@ class BorrowedAdmin(admin.ModelAdmin):
 	
 
 class BookAdmin(admin.ModelAdmin):
-	list_display = ('title', 'author', 'location', 'status', 'user', 'date_added', 'date_updated')
+	list_display = ('id', 'title', 'author', 'location', 'status', 'user', 'date_added', 'date_updated')
 	list_filter = ('date_added',)
 	search_fields = ('title', 'status')
 

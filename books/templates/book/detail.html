@@ -26,14 +26,13 @@
 <br>
 {% for commented in comment %}
 <div class="mx-auto" style="width: 600px;">
-<div class="comment">
+  <div class="comment">
   
-  <p class="info" style="margin: 0;display: inline-block;">
+    <p class="info" style="margin: 0;display: inline-block;">
     
     Commented by <b>{{ commented.author.first_name }} {{ commented.author.last_name }}</b>
     -  {{ commented.date_added }} </p>
-    {% if commented.author == request.user %}
-
+  {% if commented.author == request.user %}
     
     <div class="modal" id="myModal">
       <div class="modal-dialog">
@@ -96,7 +95,7 @@
         
 
     </div>
-    {% endif %}
+  {% endif %}
   </p>
   {{ commented.content|linebreaks }}
 </div>

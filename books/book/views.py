@@ -17,16 +17,14 @@ from django.http import HttpResponseForbidden
 from django.core.exceptions import PermissionDenied, ValidationError
 
 # Create your views here.
-class IndexView(LoginRequiredMixin, TemplateView):
+class IndexView(TemplateView):
     template_name = "book/index.html"
-    raise_exception = True
 
     def get(self, request):
         books = Book.objects.order_by('-date_added')
         bookFilter = OrderFilter(request.GET, queryset=books)
         books = bookFilter.qs
         return render(request, self.template_name, {'books': books, 'filter': bookFilter})
-
 
 
 class AddBookView(TemplateView):
@@ -122,8 +120,8 @@ class OwnedBookView(TemplateView):
     template_name = "book/ownedbook.html"
 
     def get(self, request):  
-            auth = Book.objects.filter(user=request.user)  
-            return render(request, self.template_name, {'books':auth})
+            books = Book.objects.filter(user=request.user)  
+            return render(request, self.template_name, {'books':books})
 
 class UpdateBookView(TemplateView):
     template_name = "book/update.html"
@@ -153,7 +151,7 @@ class DeleteBookView(TemplateView):
 
     def get(self, request, **kwargs):
         book = Book.objects.get(pk=self.kwargs.get('pk'))
-        if book.user == request.user:
+        if book.user == request.user: 
             context = {'book': book} 
         return render(request, self.template_name, context)
     
@@ -184,12 +182,9 @@ class ReturnView(TemplateView):
     template_name = "book/borrowedbook.html"
 
     def post(self, request, **kwargs):
-       
         book_borrow = BorrowedBook.objects.get(pk=self.kwargs.get('pk')) 
         date_now = datetime.datetime.now()
       
-       
-        #book=book, borrower=request.user
         if book_borrow.book.status == "Borrowed":
             book_borrow.book.status = "Available"
             book_borrow.return_date = date_now

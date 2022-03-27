@@ -8,7 +8,9 @@ from .forms import NewUserForm, LoginForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+
 # Create your views here.
+
 class LoginView(TemplateView):
     template_name = "login/login.html"
 
@@ -19,6 +21,7 @@ class LoginView(TemplateView):
 
     def post(self, request):
         form = LoginForm(request.POST or None)
+        #import pdb; pdb.set_trace()
         if form.is_valid():
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
@@ -48,7 +51,6 @@ class RegisterView(TemplateView):
     
     def post(self, request):
         form = NewUserForm(request.POST)
-        
             
         if form.is_valid():
             first_name = form.cleaned_data.get('first_name')

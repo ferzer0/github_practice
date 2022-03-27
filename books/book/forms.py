@@ -1,12 +1,13 @@
 from ast import Add
+from wsgiref.validate import validator
 from django.forms import ModelForm
 from .models import BorrowedBook, Book, BookComments
 from django import forms
 from django.core.exceptions import ValidationError
 
 
-class BookingForm(ModelForm):
-    title = forms.CharField(max_length=30,  required=False, help_text='', widget=forms.TextInput(attrs={'class':'form-control'}))
+class BookingForm(forms.ModelForm):
+    title = forms.CharField(max_length=30, required=False, help_text='', widget=forms.TextInput(attrs={'class':'form-control'}))
     author = forms.CharField(max_length=30, required=False, help_text='', widget=forms.TextInput(attrs={'class':'form-control'}))
     location = forms.CharField(max_length=30, required=False, help_text='', widget=forms.TextInput(attrs={'class':'form-control', 'id':'get_location'}))
 
